@@ -1,0 +1,61 @@
+body {
+  font-family: verdana;
+  font-size: 90%;
+  margin: 10px;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+tr {
+  background-color: #bdfff0
+}
+
+table {
+  width: 100%;
+}
+
+td,th {
+  vertical-align: middle;
+}
+
+table.outer_class > tbody > tr:nth-child(even) {
+  background-color: #82ddff;
+}
+
+
+h1 {
+  color: red;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+article > h1 {
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+p {
+  margin-bottom: 5px;
+}
+
+a {
+  font-size: 90%;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: rgb(192, 80, 77);
+}
+a:focus, a:hover, a:active {
+  color: red;
+  text-decoration: underline;
+}
+
+ul {
+  list-style-position: inside;
+}

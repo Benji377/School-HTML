@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Benjamin">
+    <meta name="description" content="Meine Webseite">
+    <link rel="stylesheet" href="html5reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+    <title>Übung zu HTML, CSS und JavaScript</title>
+  </head>
+  <body onload="updateTime()">
+    <a id="page_top"></a>
+    <header>
+      <h1 style="display:inline-block">Meine Homepage</h1>
+      <p id="zeit" style="display:inline-block; position:fixed; right:18px; top:20px">12/12/2012, 00:00:00 PM</p>
+      <table class="outer_class">
+        <tr>
+          <th style="vertical-align:top">Daten:</th>
+          <td>
+            <table class="inner_class">
+              <tr>
+                <td>Vorname:</td>
+                <td>Sepp</td>
+                <td rowspan="5"><img src="profile.jpg" alt="Profilbild"></td>
+              </tr>
+              <tr>
+                <td>Nachname:</td>
+                <td>Hintner</td>
+              </tr>
+              <tr>
+                <td>Geburtsdatum:</td>
+                <td>1. April 1999</td>
+              </tr>
+              <tr>
+                <td>Wohnort:</td>
+                <td>Im Netz 13, 127.0.0.1 Internet</td>
+              </tr>
+              <tr>
+                <td>Erreichbar:</td>
+                <td><a href="mailto:sepp@hintner.org">sepp@hintner.org</a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><a href="#" onclick="meldung()"><img src="OrdnerGeschlossen.png" alt="Ordner" onmouseover="openFolder(this)" onmouseout="closeFolder(this)"></a></td>
+          <td>Was sagt das Netz &uuml;ber mich</td>
+        </tr>
+        <tr>
+          <td><a href="#leben_article"><img src="OrdnerGeschlossen.png" alt="Ordner" onmouseover="openFolder(this)" onmouseout="closeFolder(this)"></a></td>
+          <td>Mein Leben bis jetzt und in Zukunft</td>
+        </tr>
+        <tr>
+          <td><a href="#hobby_article"><img src="OrdnerGeschlossen.png" alt="Ordner" onmouseover="openFolder(this)" onmouseout="closeFolder(this)"></a></td>
+          <td>Wenn ich mal nicht arbeite</td>
+        </tr>
+        <tr>
+          <td><a href="#projekt_article"><img src="OrdnerGeschlossen.png" alt="Ordner" onmouseover="openFolder(this)" onmouseout="closeFolder(this)"></a></td>
+          <td>Meine Projekte zum Nachlesen und Staunen</td>
+        </tr>
+      </table>
+      <hr>
+      <article id="leben_article" class="">
+        <h1>Mein Leben bis jetzt und in Zukunft</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <a href="#page_top">Nach oben</a>
+      </article>
+      <hr>
+      <article id="hobby_article" class="">
+        <h1>Wenn ich mal nicht arbeite</h1>
+        <ul>
+          <li>Schwimmen</li>
+          <li>Lesen</li>
+          <li>Bücher schreiben</li>
+          <li>Musik hören</li>
+        </ul>
+        <a href="#page_top">Nach oben</a>
+      </article>
+      <article id="projekt_article" class="">
+        <h1>Meine Projekte zum nachlesen und staunen</h1>
+        <ul>
+          <li><a href="projekte/projekt1.html">Projekt 1</a></li>
+          <li><a href="projekte/projekt2.html">Projekt 2</a></li>
+          <li><a href="projekte/projekt3.html">Projekt 3</a></li>
+        </ul>
+        <a href="#page_top">Nach oben</a>
+      </article>
+    </header>
+  </body>
+</html>

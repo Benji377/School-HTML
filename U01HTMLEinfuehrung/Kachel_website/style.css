@@ -1,0 +1,89 @@
+html {
+  width: 600px;
+  margin: 0 auto;
+  background-color: black;
+}
+
+body {
+  background-color: grey;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+table {
+  border: 5px solid red;
+  border-radius: 5px;
+  width: 450px;
+}
+
+td {
+  background-color: red;
+}
+
+h1 {
+  color: white;
+  background-color: blue;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+td > h1 {
+  border: 5px solid lime;
+  margin-top: 5px;
+}
+
+header {
+  padding-bottom: 5px;
+}
+
+header > h1 {
+  border: 5px solid cyan;
+}
+
+p {
+  background-color: white;
+}
+
+img {
+  background-color: yellow;
+  border-radius: 5px;
+  padding: 10px;
+  float: right;
+  margin-top: -26px;
+}
+
+article {
+  background-color: orange;
+  border: 5px solid orange;
+  border-radius: 5px;
+  margin: 3px;
+  height: 200px;
+  width: 205px;
+}
+
+ul {
+  float: right;
+  list-style-type: none;
+  background-color: red;
+  border: 5px solid red;
+  border-radius: 5px;
+  width: 110px;
+}
+
+li {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+ul > h1 {
+  border: 5px solid green;
+}
+
+footer > h2 {
+  background-color: cyan;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
