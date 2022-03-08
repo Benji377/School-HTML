@@ -59,3 +59,10 @@ a:focus, a:hover, a:active {
 ul {
   list-style-position: inside;
 }
+
+#zeit {
+  display:inline-block;
+  position:fixed;
+  right:18px;
+  top:20px"
+}

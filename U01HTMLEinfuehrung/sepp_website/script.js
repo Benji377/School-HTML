@@ -1,8 +1,6 @@
 
 function meldung() {
-  if (confirm("Press a button")) {
-    window.open("https://www.google.com/search?q=Sepp+Hintner", "_blank");
-  }
+  return confirm("Seite verlassen?");
 }
 
 function openFolder(img) {
