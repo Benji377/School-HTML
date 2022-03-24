@@ -28,7 +28,7 @@ h1 {
   padding: 5px;
 }
 
-td > h1 {
+nav > h1 {
   border: 5px solid lime;
   margin-top: 5px;
 }
@@ -43,6 +43,8 @@ header > h1 {
 
 p {
   background-color: white;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 img {
@@ -62,7 +64,7 @@ article {
   width: 205px;
 }
 
-ul {
+body > nav {
   float: right;
   list-style-type: none;
   background-color: red;
