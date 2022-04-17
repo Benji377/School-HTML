@@ -11,11 +11,12 @@ gelangen. Mit dem PHP header location würden die Werte im Formular überschrieb
 <?php
 } else {
   // Wenn der Cookie nur so lange am Leben bleiben soll, wie der Browser,
-  // wird es auf 0 gesetzt
+  // wird die Zeit auf 0 gesetzt
   if ($_POST['lifespan'] == 1) {
     setcookie($_POST['name'], $_POST['value'], 0);
+  } else {
+    setcookie($_POST['name'], $_POST['value'], time() + $_POST['lifespan']);
   }
-  setcookie($_POST['name'], $_POST['value'], time() + $_POST['lifespan']);
 ?>
 <!-- Bei erfolgeiches Erstellen eines Cookie kann man zum CookieManager
 zurück gelangen -->
