@@ -9,13 +9,13 @@
     </tr>
 <?php forEach($list as $key => $value) {?>
   <tr>
-    <td><?php$value->getUsername()?></td>
-    <td><?php$value->getMale() ? "Männlich" : "Weiblich"?></td>
-    <td><?php$value->getBirthDate()?></td>
+    <td><?= $value->getUsername()?></td>
+    <td><?= $value->getMale() ? "Männlich" : "Weiblich"?></td>
+    <td><?= $value->getBirthDate()?></td>
     <td><?= $value->getRating()?></td>
     <td>
-      <a href="index.php?id=3&username=<?php$value->getUsername()?>">Bearbeiten</a>
-      <a href="index.php?id=4&username=<?php$value->getUsername()?>">Löschen</a>
+      <a href="index.php?id=3&username=<?= $value->getUsername()?>">Bearbeiten</a>
+      <a href="index.php?id=4&username=<?= $value->getUsername()?>">Löschen</a>
     </td>
   </tr>
 <?php }?>

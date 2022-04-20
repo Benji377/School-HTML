@@ -3,63 +3,63 @@
   <tr>
     <td><label>Benutzername:</label></td>
     <td>
-      <input type="text" name="username" value="<?php $user->getUsername()?>">
+      <input type="text" name="username" value="<?= $user->getUsername()?>">
     </td>
     <td class="error">
-      <?php $user->getError("username")?>
+      <?= $user->getError("username")?>
     </td>
   </tr>
     <td><label>Passwort:</label></td>
     <td>
-      <input type="text" name="password" value="<?php $user->getPassword()?>">
+      <input type="password" name="password" value="<?= $user->getPassword()?>">
     </td>
     <td class="error">
-      <?php $user->getError("password")?>
+      <?= $user->getError("password")?>
     </td>
   <tr>
   </tr>
     <td><label>Passwort wiederholen:</label></td>
     <td>
-      <input type="text" name="passwordRepeat" value="<?php $user->getPasswordRepeat()?>">
+      <input type="password" name="passwordRepeat" value="<?= $user->getPasswordRepeat()?>">
     </td>
     <td class="error">
-      <?php $user->getError("passwordRepeat")?>
+      <?= $user->getError("passwordRepeat")?>
     </td>
   <tr>
   </tr>
     <td><label>Geschlecht:</label></td>
     <td>
-      <input type="radio" name="gender" id="false" value="<?php $user->getMale()?>">
-      <label for="false">Weiblich</label>
-      <input type="radio" name="gender" id="true" value="<?php $user->getMale()?>">
-      <label for="true">Männlich</label>
+      <input type="radio" name="male" value="false" <?php echo $user->getMale() ? '' : ' checked'; ?>>
+      <label for="female">Weiblich</label>
+      <input type="radio" name="male" value="true" <?php echo $user->getMale() ? ' checked' : ''; ?>>
+      <label for="male">Männlich</label>
     </td>
   <tr>
   </tr>
     <td><label>Geburtsdatum:</label></td>
     <td>
-      <input type="date" name="birthDate" value="<?php $user->getBirthDate()?>">
+      <input type="date" name="birthDate" value="<?= $user->getBirthDate()?>">
     </td>
     <td class="error">
-      <?php $user->getError("birthDate")?>
+      <?= $user->getError("birthDate")?>
     </td>
   <tr>
   </tr>
     <td><label>Bewertung:</label></td>
     <td>
-      <input type="number" name="rating" value="<?php $user->getRating()?>">
+      <input type="number" name="rating" value="<?= $user->getRating()?>">
     </td>
     <td class="error">
-      <?php $user->getError("rating")?>
+      <?= $user->getError("rating")?>
     </td>
   <tr>
   </tr>
     <td><label>Profilbild:</label></td>
     <td>
-      <input type="file" name="image" value="<?php $user->getImage()?>">
+      <input type="file" name="image" value="<?= $user->getImage()?>">
     </td>
     <td class="error">
-      <?php $user->getError("imageSize")?>
+      <?= $user->getError("imageSize")?>
     </td>
   <tr>
     <td>

@@ -25,26 +25,26 @@ class ValidableUser extends User {
 
   public function validate() {
     if(empty(parent::getUsername())){
-      $errors += array('username' =>"Der Benutzername muss eingegeben werden");
+      $this->errors += array('username' =>"Der Benutzername muss eingegeben werden");
     }
     if(empty(parent::getPassword())){
-      $errors += array('password' =>"Das Passwort muss eingegeben werden");
+      $this->errors += array('password' =>"Das Passwort muss eingegeben werden");
     }
-    if(empty(parent::getBirtdate())){
-      $errors += array('birthDate' =>"Das Geburtsdatum muss eingegeben werden");
+    if(empty(parent::getBirthdate())){
+      $this->errors += array('birthDate' =>"Das Geburtsdatum muss eingegeben werden");
     }
     if (parent::getPassword()!=parent::getPasswordRepeat()) {
-      $errors += array('passwordRepeat' =>"Das erste und das zweite Password müssen übereinstimmen");
+      $this->errors += array('passwordRepeat' =>"Das erste und das zweite Password müssen übereinstimmen");
     }
-    $dateAsObject=DateTime::createFromFormat("Y-m-d",parent::getBirtdate());
+    $dateAsObject=DateTime::createFromFormat("Y-m-d",parent::getBirthdate());
     if (DateTime::getLastErrors()["warning_count"] != 0 || DateTime::getLastErrors()["error_count"] != 0) {
-      $errors = array('birthDate'=> "Geburtsdatum im falschen Format eingegeben");
+      $this->errors = array('birthDate'=> "Geburtsdatum im falschen Format eingegeben");
     }
     if(!(parent::getRating()>=1 && parent::getRating()<=5)){
-      $errors += array('rating' => "Die Bewerttung muss zwischen 1 und 5 liegen");
+      $this->errors += array('rating' => "Die Bewerttung muss zwischen 1 und 5 liegen");
     }
     if(parent::getImageSize()>parent::MAX_IMAGE_SIZE){
-      $errors += array('imageSize'=>"Das Bild ist zu groß");
+      $this->errors += array('imageSize'=>"Das Bild ist zu groß");
     }
   }
 
