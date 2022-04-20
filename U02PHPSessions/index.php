@@ -27,7 +27,7 @@ session_start();
     } elseif ($_GET["id"] == "2") {
       $user = new ValidableUser();
       $_SESSION["user"] = $user;
-      require_once 'scripts/scr.userForm.php'
+      require_once 'scripts/scr.userForm.php';
     } elseif ($_GET["id"] == "20") {
       $user->setUsername(filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING));
       $user->setPassword(filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING));
@@ -45,16 +45,17 @@ session_start();
     } elseif ($_GET["id"] == "3") {
       if (!isset($_GET["username"])||strlen($_GET["username"]) == 0) {
         require_once 'scripts/scr.userList.php';
-    } else {
-      $user = $userList->getUser($_GET["username"]);
-      if (!$user) {
-        require_once 'scripts/scr.userList.php';
       } else {
-        $_SESSION["user"] = $user;
-        require_once 'scripts/scr.userForm.php';
+        $user = $userList->getUser($_GET["username"]);
+        if (!$user) {
+          require_once 'scripts/scr.userList.php';
+        } else {
+          $_SESSION["user"] = $user;
+          require_once 'scripts/scr.userForm.php';
+        }
       }
     } elseif ($_GET["id"] == "30") {
-    // TOD
+    // TODO
     } elseif ($_GET["id"] = "4") {
       if (isset($_GET["username"]) && strlen($_GET["username"]) > 0) {
         $username = filter_input( INPUT_GET, "username", FILTER_SANITIZE_STRING);
