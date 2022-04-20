@@ -29,9 +29,9 @@
   </tr>
     <td><label>Geschlecht:</label></td>
     <td>
-      <input type="radio" name="male" value="false" <?php echo $user->getMale() ? '' : ' checked'; ?>>
+      <input type="radio" name="male" value="false" <?= $user->getMale() ? '' : ' checked'; ?>>
       <label for="female">Weiblich</label>
-      <input type="radio" name="male" value="true" <?php echo $user->getMale() ? ' checked' : ''; ?>>
+      <input type="radio" name="male" value="true" <?= $user->getMale() ? ' checked' : ''; ?>>
       <label for="male">Männlich</label>
     </td>
   <tr>
