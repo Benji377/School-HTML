@@ -1,3 +1,5 @@
+<!-- Je nachdem, ob ein username gesetzt ist, kann man ermitteln ob
+sich das Form in editing oder adding befindet -->
 <?php if ($user->getUsername() == NULL) {
   echo '<form name="userForm" method="post" action="index.php?id=20" enctype="multipart/form-data">';
 } else {
@@ -33,6 +35,7 @@
   </tr>
     <td><label>Geschlecht:</label></td>
     <td>
+      <!-- Alternierend, je nach true oder false, wird der Radiobutton aktiviert -->
       <input type="radio" name="male" value="false" <?= $user->getMale() ? '' : ' checked'; ?>>
       <label for="female">Weiblich</label>
       <input type="radio" name="male" value="true" <?= $user->getMale() ? ' checked' : ''; ?>>
@@ -60,11 +63,14 @@
   </tr>
     <td><label>Profilbild:</label></td>
     <td>
-      <?php if ($user->getImage() !== NULL) {
+      <?php // Fügt das Bild ein, aber nur wenn es bereits eingefügt wurde
+      if ($user->getImage() !== NULL) {
         echo '<img id="user_image" src="data:image/jpeg;base64,'.base64_encode($user->getImage()).'"/>';
       }?>
       <input type="file" name="image">
-      <?php if ($user->getImage() !== NULL) {
+      <?php // Fügt das "Lösche Bild"-Knopf ein. Wobei hier die action des Form mit
+      // Javascript geändert wird um der index die richtige id zu übergeben
+      if ($user->getImage() !== NULL) {
         echo '<input type="submit" onclick="form.action=\'index.php?id=31\'" value="Bild löschen">';
       } ?>
     </td>
@@ -73,7 +79,9 @@
     </td>
   <tr>
     <td>
-      <?php if ($user->getUsername() == NULL) {
+      <?php // Je nachdem ob man den Benutzer gerade verändert, wird ein anderer
+      // Name für den Submit Knopf benutzt
+      if ($user->getUsername() == NULL) {
         echo '<input type="submit" name="submit" value="Hinzufügen">';
       } else {
         echo '<input type="submit" name="submit" value="Ändern">';
