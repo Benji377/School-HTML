@@ -56,7 +56,7 @@
   </tr>
     <td><label>Profilbild:</label></td>
     <td>
-      <input type="file" name="image" value="<?= $user->getImage()?>">
+      <input type="file" name="image" value="<?= $user->setImageFromSuperglobal($user->getImage())?>">
     </td>
     <td class="error">
       <?= $user->getError("imageSize")?>

@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
   <head>
-
+    <title>Benutzerliste</title>
   </head>
   <body>
     <a href="index.php?id=1">Benutzerliste</a>
@@ -56,12 +56,12 @@ session_start();
       }
     } elseif ($_GET["id"] == "30") {
     // TODO Parameter neu validieren und in userList schreiben
-    $user->validate();
-    if ($user->getErrors() != null || !$userList->addUser($user)) {
-      require_once 'scripts/scr.userForm.php';
-    } else {
-      require_once 'scripts/scr.userList.php';
-    }
+      $user->validate();
+      if ($user->getErrors() != null || !$userList->updateUser($username, $user)) {
+        require_once 'scripts/scr.userForm.php';
+      } else {
+        require_once 'scripts/scr.userList.php';
+      }
     } elseif ($_GET["id"] = "4") {
       if (isset($_GET["username"]) && strlen($_GET["username"]) > 0) {
         $username = filter_input( INPUT_GET, "username", FILTER_SANITIZE_STRING);
