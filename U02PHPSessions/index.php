@@ -1,7 +1,17 @@
 <?php
 require_once 'inc/classes/class.ValidableUser.php';
 require_once 'inc/classes/class.UserList.php';
+
+define("MAX_INACTIVITY_SECOND", 60);
+ini_set('session.gc_maxlifetime', MAX_INACTIVITY_SECOND); // Setzt die maximale Lebensdauer der session
 session_start();
+
+if (isset($_SESSION['expiry']) && (time() - $_SESSION['expiry'] > MAX_INACTIVITY_SECOND)) {
+    session_unset();
+    session_destroy();
+}
+$_SESSION['expiry'] = time();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,12 +65,24 @@ session_start();
         }
       }
     } elseif ($_GET["id"] == "30") {
+      $oldUsername = $user->getUsername();
+      $user->setUsername(filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING));
+      $user->setPassword(filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING));
+      $user->setPasswordRepeat(filter_input(INPUT_POST, "passwordRepeat", FILTER_SANITIZE_STRING));
+      $user->setMale(filter_input(INPUT_POST, "male", FILTER_VALIDATE_BOOLEAN));
+      $user->setBirthDate(filter_input(INPUT_POST, "birthDate", FILTER_SANITIZE_STRING));
+      $user->setRating(filter_input(INPUT_POST, "rating", FILTER_VALIDATE_FLOAT));
+      if (isset($_FILES["image"]))
+        $user->setImageFromSuperglobal($_FILES["image"]);
       $user->validate();
-      if ($user->getErrors() != null || !$userList->updateUser($username, $user)) {
+      if ($user->getErrors() != null || !$userList->updateUser($oldUsername, $user)) {
         require_once 'scripts/scr.userForm.php';
       } else {
         require_once 'scripts/scr.userList.php';
       }
+    } elseif ($_GET["id"] == "31") {
+      $user->deleteImage();
+      require_once 'scripts/scr.userForm.php';
     } elseif ($_GET["id"] = "4") {
       if (isset($_GET["username"]) && strlen($_GET["username"]) > 0) {
         $username = filter_input( INPUT_GET, "username", FILTER_SANITIZE_STRING);

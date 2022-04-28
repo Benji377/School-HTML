@@ -1,6 +1,8 @@
-
-
-<form method="post" action="index.php?id=20" enctype="multipart/form-data">
+<?php if ($user->getUsername() == NULL) {
+  echo '<form name="userForm" method="post" action="index.php?id=20" enctype="multipart/form-data">';
+} else {
+    echo '<form name="userForm" method="post" action="index.php?id=30" enctype="multipart/form-data">';
+} ?>
 <table>
   <tr>
     <td><label>Benutzername:</label></td>
@@ -59,16 +61,24 @@
     <td><label>Profilbild:</label></td>
     <td>
       <?php if ($user->getImage() !== NULL) {
-        echo '<img src="data:image/jpeg;base64,'.base64_encode($user->getImage()).'"/>';
-      } ?>
+        echo '<img id="user_image" src="data:image/jpeg;base64,'.base64_encode($user->getImage()).'"/>';
+      }?>
       <input type="file" name="image">
+      <?php if ($user->getImage() !== NULL) {
+        echo '<input type="submit" onclick="form.action=\'index.php?id=31\'" value="Bild löschen">';
+      } ?>
     </td>
     <td class="error">
       <?= $user->getError("imageSize")?>
     </td>
   <tr>
     <td>
-      <input type="submit" name="submit" value="Hinzufügen">
+      <?php if ($user->getUsername() == NULL) {
+        echo '<input type="submit" name="submit" value="Hinzufügen">';
+      } else {
+        echo '<input type="submit" name="submit" value="Ändern">';
+      }?>
+
       <input type="reset" name="reset" value="Zurücksetzen">
     </td>
     <td></td>

@@ -167,7 +167,6 @@ class User
   }
 
   public function setImageFromSuperglobal($image) {
-    var_dump($_FILES);
     if (isset($image) && $image["error"] == UPLOAD_ERR_OK) {
       $this->imageType = $image["type"];
       $this->imageSize = $image["size"];
