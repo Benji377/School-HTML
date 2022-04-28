@@ -55,7 +55,6 @@ session_start();
         }
       }
     } elseif ($_GET["id"] == "30") {
-    // TODO Parameter neu validieren und in userList schreiben
       $user->validate();
       if ($user->getErrors() != null || !$userList->updateUser($username, $user)) {
         require_once 'scripts/scr.userForm.php';

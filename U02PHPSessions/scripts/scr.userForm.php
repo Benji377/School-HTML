@@ -1,3 +1,5 @@
+
+
 <form method="post" action="index.php?id=20" enctype="multipart/form-data">
 <table>
   <tr>
@@ -47,7 +49,7 @@
   </tr>
     <td><label>Bewertung:</label></td>
     <td>
-      <input type="number" name="rating" value="<?= $user->getRating()?>">
+      <input type="number" name="rating" step="0.01" value="<?= $user->getRating()?>">
     </td>
     <td class="error">
       <?= $user->getError("rating")?>
@@ -56,7 +58,10 @@
   </tr>
     <td><label>Profilbild:</label></td>
     <td>
-      <input type="file" name="image" value="<?= $user->setImageFromSuperglobal($user->getImage())?>">
+      <?php if ($user->getImage() !== NULL) {
+        echo '<img src="data:image/jpeg;base64,'.base64_encode($user->getImage()).'"/>';
+      } ?>
+      <input type="file" name="image">
     </td>
     <td class="error">
       <?= $user->getError("imageSize")?>
