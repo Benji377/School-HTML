@@ -205,8 +205,7 @@ class UserList {
   }
 
   public static function authUser($username, $password) {
-    // Wenn Username und Password noch nicht gesetzt wurden wird es gesetzt, danach
-    // wird nur noch kontrolliert ob es auch übereinstimmt
+    // ÜBER SQL MIT DATENBANK
     $ret = false;
     if (isset($_GET["loginUsername"]) && isset($_GET["loginPassword"])) {
       if ($username == $_GET["loginUsername"] && $password == $_GET["loginPassword"]) {

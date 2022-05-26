@@ -22,6 +22,7 @@ if (isset($_GET["id"])) {
         // Kontrolliere ob Benutzername und Passwort passen
         $username = filter_input(INPUT_POST, "loginUsername", FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, "loginPassword", FILTER_SANITIZE_STRING);
+
         if (!UserList::authUser($username, $password)) {
           $_SESSION["loginError"] = true;
           header('Location:login.php');

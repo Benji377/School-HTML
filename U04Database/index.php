@@ -25,8 +25,10 @@ $_SESSION['expiry'] = time();
     <a href="index.php?id=2">Neuer Benutzer</a>
     <?php if (isset($_SESSION["loginUsername"])) {
       echo '<a href="index.php?id=101">Logout</a>';
+      echo '<a style="text-decoration: none"> Sie sind eingeloggt als Benutzer <b>' . $_SESSION["loginUsername"] . '</b></a>';
     } else {
       echo '<a href="index.php?id=100">Login</a>';
+      echo '<a style="text-decoration: none"> Sie sind nicht eingeloggt</a>';
     } ?>
     <?php
     if (!isset($_SESSION["userList"])) {
