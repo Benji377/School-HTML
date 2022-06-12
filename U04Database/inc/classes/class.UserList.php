@@ -144,7 +144,7 @@ class UserList {
         $stmt->bind_result($username, $password, $male, $birthDate,
         $rating, $imageType, $imageSize, $image);
         if ($stmt->fetch()) {
-          $user = new ValidableUser($username, null, null, $male,
+          $user = new ValidableUser($username, $password, null, $male,
           $birthDate, $rating, $imageType, $imageSize, $image);
           $ret = $user;
         }
@@ -207,15 +207,63 @@ class UserList {
   public static function authUser($username, $password) {
     // ÜBER SQL MIT DATENBANK
     $ret = false;
-    if (isset($_GET["loginUsername"]) && isset($_GET["loginPassword"])) {
-      if ($username == $_GET["loginUsername"] && $password == $_GET["loginPassword"]) {
-        $ret = true;
+    $retrievedPasswd;
+    $retrievedUser;
+    $con = new MySQLi("localhost", "root", "", "users");
+
+    if (isset($username) && isset($password)) {
+      // Try to get Username and password from Database
+      if (!$con->connect_errno) {
+        $sql = "
+        SELECT uusername, upassword
+        FROM users
+        WHERE uusername = ?;
+        ";
+        $stmt = $con->prepare($sql);
+        if ($con->errno) {
+          trigger_error($con->error, E_USER_WARNING);
+        } else {
+          $stmt->bind_param("s", $username);
+          $stmt->execute();
+          $stmt->store_result();
+          $stmt->bind_result($retrievedUser, $retrievedPasswd);
+          if ($stmt->fetch()) {
+            if (password_verify($password, $retrievedPasswd)) {
+              $ret = true;
+            } else {
+              $ret = false;
+            }
+          } else {
+            // Kein Benutzer gefunden, deswegen neu erstellen
+            $sql = "
+            INSERT INTO users(uusername, upassword)
+            VALUES (?, ?);
+            ";
+            $stmt = $con->prepare($sql);
+            if ($con->errno) {
+              // Meldung muss händisch geworfen werden
+              trigger_error($con->error, E_USER_WARNING);
+            } else {
+              $stmt->bind_param("ss", $username, $upassword);
+              $upassword = password_hash($password, PASSWORD_DEFAULT);
+              $stmt->execute();
+              if ($con->errno) {
+                if ($con->errno == 1062)
+                  $user->setError("username", "Benutzername bereits vergeben");
+                else
+                  trigger_error($con->error, E_USER_WARNING);
+              } else {
+                echo "Anzahl eingetragene Datensätze ".$stmt->affected_rows;
+                echo "Primärschlüssel neuer Benutzer ".$stmt->insert_id;
+                $ret = true;
+              }
+            }
+          }
+          $stmt->close();
+        }
+        $con->close();
       }
-    } else {
-      $_GET["loginUsername"] = $username;
-      $_GET["loginPassword"] = $password;
-      $ret = true;
     }
-    return true;
+    return $ret;
   }
 }
