@@ -9,6 +9,7 @@ $quiz = new Quiz();
     <head>
         <link rel="stylesheet" href="inc/css/usermanagement.css">
         <link rel="stylesheet" href="inc/css/style.css">
+        <script type="text/javascript" src="js/script.js"></script>
         <title>Fahrschulquiz</title>
     </head>
     <body>

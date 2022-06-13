@@ -1,14 +1,22 @@
 <table width="100%">
     <tr>
         <td>
-            <h2>Frage 1 von 10</h2>
+            <?php
+                echo '<h2>Frage ' . $quiz->getActualQuestionNumber() . ' von ' . $quiz->getNumberQuestions();
+            ?>
         </td>
         <td class="right-align">
-            <img src="images/1.jpg">
+            <?php
+                if ($quiz->getActualQuestion()->getImageFilename()) {
+                    echo '<img src="images/' . $quiz->getActualQuestion()->getImageFilename() . '">';
+                }
+            ?>
         </td>
     </tr>
     <tr>
-        <td>Was zeigt das Zeichen Nr. 254 an?</td>
-        <td class="right-align">Abb. 254</td>
+        <?php
+            echo '<td>' . $quiz->getActualQuestion()->getQuestionText() . '</td>';
+            echo '<td class="right-align">' . $quiz->getActualQuestion()->getImageText() . '</td>';
+        ?>
     </tr>
 </table>
