@@ -14,18 +14,20 @@ $quiz = new Quiz();
     </head>
     <body>
         <h1>Fahrschulquiz</h1>
-        
-        <?php
-            require_once 'scripts/scr.HeaderSection.php';
-        ?>
-        <hr>
-        <?php
-            require_once 'scripts/scr.QuestionSection.php';
-        ?>
-        <hr>
-        <?php
-            require_once 'scripts/scr.AnswerSection.php';
-        ?>
-        <hr>
+        <form action="scripts/scr.QuizFormAction.php">
+            
+            <?php
+                require_once 'scripts/scr.HeaderSection.php';
+            ?>
+            <hr>
+            <?php
+                require_once 'scripts/scr.QuestionSection.php';
+            ?>
+            <hr>
+            <?php
+                require_once 'scripts/scr.AnswerSection.php';
+            ?>
+            <hr>
+        </form>
     </body>
 </html>
