@@ -13,9 +13,9 @@
             }
             
             // Kontrolliert ob $_GET variable gesetzt ist und setzt somit die qZahl neu
-            if (isset($_GET["prevq"])) {
+            if (isset($_GET["prevq"]) && $quiz->getActualQuestionNumber() > 0) {
                 $quiz->previousQuestion();
-            } else if (isset($_GET["nextq"])) {
+            } else if (isset($_GET["nextq"]) && $quiz->getActualQuestionNumber() < ($quiz::QUESTIONS_COUNT - 1)) {
                 $quiz->nextQuestion();
             }
             

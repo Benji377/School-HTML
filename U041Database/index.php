@@ -1,7 +1,15 @@
 <?php 
 require_once 'inc/classes/class.Quiz.php';
 
-$quiz = new Quiz();
+// PROBLEM: Variable wird bei jedem submit nue gesetzt oder gelöscht.
+// das verhindert das korrekte ausführen der Datei
+session_start();
+if (isset($_SESSION["quiz"])) {
+    $quiz = $_SESSION["quiz"];
+} else {
+    $quiz = new Quiz();
+    $_SESSION['quiz'] = $quiz; 
+}
 ?>
 
 <!DOCTYPE html>
