@@ -1,5 +1,3 @@
-<!<!-- TODO: Add questionNumber as value -->
-<input type="hidden" name="questionNumber">
 <table width="100%">
     <tr>
         <th width="90%">Antworten</th>

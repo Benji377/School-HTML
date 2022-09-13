@@ -108,7 +108,8 @@ class Quiz
 	 */
 	public function nextQuestion() {
         if ($this->getHasNextQuestion()) {
-            return $this->questions[$this->actualQuestionNumber++];
+            $this->actualQuestionNumber = $this->actualQuestionNumber++;
+            return $this->questions[$this->actualQuestionNumber];
         }
 	}
 	/**
@@ -117,7 +118,8 @@ class Quiz
 	 */
 	public function previousQuestion() {
         if ($this->getHasPreviousQuestion()) {
-            return $this->questions[$this->actualQuestionNumber--];
+            $this->actualQuestionNumber = $this->actualQuestionNumber--;
+            return $this->questions[$this->actualQuestionNumber];
         }
 	}
 	/**

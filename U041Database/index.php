@@ -14,7 +14,7 @@ $quiz = new Quiz();
     </head>
     <body>
         <h1>Fahrschulquiz</h1>
-        <form action="scripts/scr.QuizFormAction.php">
+        <form action="scripts/scr.FormAction.php" method="POST">
             
             <?php
                 require_once 'scripts/scr.HeaderSection.php';
