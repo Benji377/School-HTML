@@ -2,7 +2,7 @@
     <tr>
         <td>
             <?php
-                echo '<h2>Frage ' . $quiz->getActualQuestionNumber() . ' von ' . $quiz->getNumberQuestions();
+                echo '<h3>Frage ' . $quiz->getActualQuestionNumber() . ' von ' . $quiz->getNumberQuestions() . '</h3>';
             ?>
         </td>
         <td class="right-align">

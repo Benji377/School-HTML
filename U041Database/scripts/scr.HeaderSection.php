@@ -7,9 +7,16 @@
         <td class="middle-align">
         <?php
             // Wenn noch keine Nummer gesetzt wurde, sind wir am Anfang des Quizes und
-            // setzen somit die Zahl auf 1
+            // setzen somit die Zahl auf 0
             if (empty($quiz->getActualQuestionNumber())) {
-                $quiz->setActualQuestionNumber(1);
+                $quiz->setActualQuestionNumber(0);
+            }
+            
+            // Kontrolliert ob $_GET variable gesetzt ist und setzt somit die qZahl neu
+            if (isset($_GET["prevq"])) {
+                $quiz->previousQuestion();
+            } else if (isset($_GET["nextq"])) {
+                $quiz->nextQuestion();
             }
             
             // Mithilfe der Klasse Quiz solll ein Array geholt werden wo alle beantworteten Fragen drin stehen

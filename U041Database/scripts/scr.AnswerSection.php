@@ -10,9 +10,8 @@
         for ($i = 0; $i < count($quiz->getActualQuestion()->getAnswers()); $i++) {
             echo '<tr>';
             echo '<td>' . $quiz->getActualQuestion()->getAnswers()[$i]->getAnswerText() . '</td>';
-            // TODO: Buttons sollen status der Answerklasse updaten, wie?
-            echo '<td class="middle-align"><input type="radio" id="true_'.$i.'" name="ans1" value="TRUE"></td>';
-            echo '<td class="middle-align"><input type="radio" id="false_'.$i.'" name="ans1" value="FALSE"></td>';
+            echo '<td class="middle-align"><input type="radio" name="ans_'.$i.'" value="TRUE"></td>';
+            echo '<td class="middle-align"><input type="radio" name="ans_'.$i.'" value="FALSE"></td>';
             echo '</tr>';
         }
     ?>
