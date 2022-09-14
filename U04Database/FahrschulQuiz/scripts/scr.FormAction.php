@@ -1,4 +1,5 @@
 <?php
+
 // Leitet den Benutzer je nach Auswahl an verschieden Stellen weiter
 if (isset($_POST["quizend"])) {
     // Quiz wurde beendet und Punkte werden vergeben

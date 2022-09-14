@@ -20,9 +20,21 @@ if (isset($_SESSION["quiz"])) {
         <title>Fahrschulquiz</title>
     </head>
     <body>
-        <h1>Fahrschulquiz</h1>
+        <h1 style="float:left;">Fahrschulquiz</h1>
         
-        <?php if (isset($_GET["completed"])) {
+        <?php
+        // Kontrolliert ob ein Benutzer eingeloggt ist oder nicht.
+        // Zum Login und Logout wird die Benutzerliste der vorherigen Übung benutzt
+        if (isset($_SESSION["loginUsername"])) {
+            echo '<p style="float:right;"> Sie sind eingeloggt als <b>'. $_SESSION["loginUsername"] .'</b> <a href="../UserListe/index.php?id=101">Logout</a> </p>';
+        } else {
+            echo '<p style="float:right;"> Sie sind nicht eingeloggt <a href="../UserListe/index.php?id=100">Login</a></p>';
+            // Setzt einen roten Text als Warnung dar
+            echo '<p style="color:red";><b>Ihre Antworten werden nicht gespeichert. Loggen Sie sich ein, wenn Sie das Quiz'
+            . '<br>durchführen und auswerten lassen möchten.</b></p>';
+        }
+        
+        if (isset($_GET["completed"])) {
             // Wenn ein Get flag gesetzt wird, soll das Ergebnis des Quiz gezeigt werden
             require_once './completed.php';
         } else {

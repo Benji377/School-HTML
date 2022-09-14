@@ -1,6 +1,8 @@
 <h2>Auswertung</h2>
 
-<p>Von .. möglichen Punkte haben Sie .. erreicht. Das sind .. Prozent. Sie haben den Test ..</p>
+<p>Von <?= $quiz->getMaximalPoints(); ?> möglichen Punkte haben Sie 
+<?= $quiz->getPoints(); ?> erreicht. Das sind <?= $quiz->getPointsInPercent(); ?> 
+Prozent. Sie haben den Test <?= $quiz->getpassed() ? "bestanden" : "nicht bestanden"; ?></p>
 <hr>
 
 <!-- Für jede Frage kommt eine Frage - Sektion und eine Antwort - Sektion -->

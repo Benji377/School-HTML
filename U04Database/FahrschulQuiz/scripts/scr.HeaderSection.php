@@ -7,9 +7,9 @@
         <td class="middle-align">
         <?php
             // Wenn noch keine Nummer gesetzt wurde, sind wir am Anfang des Quizes und
-            // setzen somit die Zahl auf 0
+            // setzen somit die Zahl auf 1
             if (empty($quiz->getActualQuestionNumber())) {
-                $quiz->setActualQuestionNumber(0);
+                $quiz->setActualQuestionNumber(1);
             }
             
             // Kontrolliert ob $_GET variable gesetzt ist und setzt somit die qZahl neu
@@ -44,8 +44,8 @@
         ?>
         </td>
         <td class="right-align">
-            <button name="prevq" onclick="questionLink(1)">Vorherige Frage</button>
-            <button name="nextq" onclick="questionLink(<?php echo $quiz->getActualQuestionNumber(); ?>)">Nächste Frage</button>
+            <button name="prevq" onclick="questionLink(<?= $quiz->getActualQuestionNumber(); ?>)">Vorherige Frage</button>
+            <button name="nextq" onclick="questionLink(<?= $quiz->getActualQuestionNumber(); ?>)">Nächste Frage</button>
         </td>
     </tr>
 </table>
