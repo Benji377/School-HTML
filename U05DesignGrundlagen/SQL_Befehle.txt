@@ -1,0 +1,164 @@
+1. ERROR 1467 (HY000): Failed to read auto-increment value from storage engine
+
+2. CREATE DATABASE buecherverwaltung DEFAULT CHARSET = latin1;
+
+3. CREATE TABLE autoren (
+    aid int NOT NULL auto_increment,
+    PRIMARY KEY (aid),
+    aname varchar(60) NOT NULL,
+    ageburtsdatum date NOT NULL
+   ) ENGINE INNODB;
+
+5. CREATE TABLE kategorien (
+    kid int NOT NULL auto_increment,
+    PRIMARY KEY (kid),
+    kname varchar(60) NOT NULL,
+    khauptnummer int
+   ) ENGINE INNODB;
+
+6. UPDATE `kategorien` SET `khauptnummer` = NULL WHERE `kategorien`.`kid` = 11; 
+
+7. ALTER TABLE kategorien ADD FOREIGN KEY (khauptnummer) REFERENCES kategorien(kid) ON DELETE CASCADE ON UPDATE CASCADE;
+
+8. CREATE TABLE sprachen (
+    sid int NOT NULL auto_increment,
+    PRIMARY KEY (sid),
+    sname varchar(60) NOT NULL
+   ) ENGINE INNODB;
+
+9. INSERT INTO `sprachen` (`sid`, `sname`) VALUES (NULL, 'english'); 
+   INSERT INTO `sprachen` (`sid`, `sname`) VALUES (NULL, 'deutsch'); 
+   INSERT INTO `sprachen` (`sid`, `sname`) VALUES (NULL, 'svensk'); 
+   INSERT INTO `sprachen` (`sid`, `sname`) VALUES (NULL, 'norsk');
+
+10. CREATE TABLE verlage (
+    vid int NOT NULL auto_increment,
+    PRIMARY KEY (vid),
+    vname varchar(60) NOT NULL
+   ) ENGINE INNODB;
+
+12. CREATE TABLE titel (
+    tnummer int NOT NULL auto_increment,
+    PRIMARY KEY (tnummer),
+    ttitel varchar(200) NOT NULL,
+    tuntertitel varchar(200),
+    tauflage int(255) UNSIGNED NOT NULL DEFAULT 1,
+    terscheinungsjahr year,
+    tisbn varchar(20),
+    tvergriffen boolean,
+    tkommentar mediumtext,
+    tbild mediumblob,
+    tpreis decimal(38, 2),
+    tletzteaenderung timestamp
+   ) ENGINE INNODB;
+
+13. autoren 1-n titel
+kategorien 1-n titel
+sprachen 1-n titel
+verlage 1-n titel
+
+14. anummer NOT NULL titel aid autoren RESTRICT
+knummer NOT NULL titel kid kategorien CASCADE
+snummer NOT NULL titel sid sprachen RESTRICT
+vnummer NULL titel vid verlage NULL
+
+15. ALTER TABLE titel
+    ADD anummer int NOT NULL,
+    ADD knummer int NOT NULL,
+    ADD snummer int NOT NULL,
+    ADD vnummer int;
+
+16. ALTER TABLE titel ADD FOREIGN KEY (anummer) REFERENCES autoren(aid) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE titel ADD FOREIGN KEY (knummer) REFERENCES kategorien(kid) ON DELETE CASCADE ON UPDATE RESTRICT;
+ALTER TABLE titel ADD FOREIGN KEY (snummer) REFERENCES sprachen(sid) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE titel ADD FOREIGN KEY (vnummer) REFERENCES verlage(vid) ON DELETE SET NULL ON UPDATE RESTRICT;
+
+18. SELECT t.ttitel, a.aname, k.kname, s.sname, v.vname 
+	FROM titel t, autoren a, kategorien k, sprachen s, verlage v
+	WHERE t.anummer = a.aid
+	AND t.knummer = k.kid
+	AND t.snummer = s.sid
+	AND t.vnummer = v.vid
+	ORDER BY t.ttitel ASC;
+
+19. SELECT a.aname, a.ageburtsdatum FROM autoren a, titel t
+	WHERE a.aid = t.anummer
+	AND k.kname = "Database";
+
+20. SELECT k2.kname
+	FROM kategorien k1, kategorien k2
+	WHERE k1.kname = "Programming" AND
+		k1.kid = k2.hauptnummer;
+
+21. SELECT t.ttitel, t.tpreis 
+    FROM titel t  
+    WHERE t.tpreis > 40 
+    ORDER BY 2 DESC LIMIT 5; 
+
+23. CREATE DATABASE forenverwaltung DEFAULT CHARSET = latin1;
+
+24. CREATE TABLE benutzer (
+    bnummer int NOT NULL auto_increment,
+    PRIMARY KEY (bnummer),
+    bname varchar(20) NOT NULL,
+    bpasswd varchar(32) NOT NULL,
+    bemail varchar(100),
+    baktiv boolean DEFAULT 0
+   ) ENGINE MyISAM;
+
+26. CREATE TABLE foren (
+	fnummer int NOT NULL auto_increment,
+	PRIMARY KEY (fnummer),
+	fname varchar(80) NOT NULL,
+	fsprache int NOT NULL
+	) ENGINE MyISAM;
+
+28. CREATE TABLE meldungen (
+	mnummer int NOT NULL auto_increment,
+	PRIMARY KEY (mnummer),
+	fnummer int NOT NULL,
+	mwurzelnummer int NOT NULL,
+	mvaternummer int,
+	bnummer int NOT NULL,
+	mbetreff varchar(200) NOT NULL,
+	mtext varchar(65535) NOT NULL,
+	mletzteaenderung timestamp
+	) ENGINE MyISAM;
+
+30. foren 1:n benutzer
+    foren n:1 sprachen
+    foren 1:n meldungen
+    benutzer 1:n meldungen
+
+31. ALTER TABLE `meldungen` ADD FULLTEXT(`mbetreff`, `mtext`); 
+
+32. SELECT b.bname, m.mletzteaenderung, m.mbetreff, m.mtext, MATCH (m.mbetreff, m.mtext) 
+	AGAINST ("Datenbank ODBC Zugriff")
+	FROM meldungen m, benutzer b
+	WHERE b.bnummer = m.bnummer 
+	AND MATCH (m.mbetreff, m.mtext) AGAINST ("Datenbank ODBC Zugriff") > 3
+	ORDER BY 5 DESC;
+
+33. SELECT b.bname, m.mletzteaenderung, m.mbetreff, m.mtext, m2.mbetreff, MATCH (m.mbetreff, m.mtext) 
+	AGAINST ("Datenbank ODBC Zugriff")
+	FROM meldungen m, benutzer b, meldungen m2
+	WHERE b.bnummer = m.bnummer 
+    	AND MATCH (m.mbetreff, m.mtext) AGAINST ("Datenbank ODBC Zugriff") > 3 
+    	AND m2.mnummer = m.mwurzelnummer 
+    	AND m2.mbetreff != m.mbetreff
+	ORDER BY 6 DESC;
+
+34. SELECT COUNT(m.mnummer) FROM meldungen m, foren f
+	WHERE f.fnummer = m.fnummer AND f.fname = "Linux, 6. Auflage"
+
+35. SELECT m.mnummer, m.mbetreff, m.mtext, m.mletzteaenderung 
+	FROM meldungen m, meldungen m2
+	WHERE m.mwurzelnummer = m2.mnummer 
+    	AND m2.mbetreff = "LaTeX";
+
+36. SELECT m.mbetreff
+	FROM meldungen m, foren f
+	WHERE f.fnummer = m.fnummer 
+	AND f.fname = "MySQL" 
+	AND m.mvaternummer IS NULL
+

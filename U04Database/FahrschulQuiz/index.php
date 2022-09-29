@@ -30,7 +30,7 @@ if (isset($_SESSION["quiz"])) {
         } else {
             echo '<p style="float:right;"> Sie sind nicht eingeloggt <a href="../UserListe/index.php?id=100">Login</a></p>';
             // Setzt einen roten Text als Warnung dar
-            echo '<p style="color:red";><b>Ihre Antworten werden nicht gespeichert. Loggen Sie sich ein, wenn Sie das Quiz'
+            echo '<p style="color:red; padding-top: 50px; padding-left: 25%;"><b>Ihre Antworten werden nicht gespeichert. Loggen Sie sich ein, wenn Sie das Quiz'
             . '<br>durchführen und auswerten lassen möchten.</b></p>';
         }
         
